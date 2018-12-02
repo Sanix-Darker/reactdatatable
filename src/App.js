@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import $ from "jquery";
+import 'datatables';
 import SampleTable from './components/SampleTable';
 
 class App extends Component {
@@ -29,7 +30,7 @@ class App extends Component {
 
   componentDidMount(){
     $(document).ready(function() {
-      //$('#tableSample').DataTable();
+      $('#tableSample').dataTable();
     });
   }
 
