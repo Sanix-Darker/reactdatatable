@@ -11,6 +11,8 @@ class AddFormData extends Component {
 	}
 
 	componentWillReceiveProps(nextProps){
+        console.log(nextProps);        
+        console.log(nextProps.upd);
 		if (nextProps.upd.id) {
 			this.setState({
 				textName: nextProps.upd.name,
@@ -49,7 +51,8 @@ class AddFormData extends Component {
 
     render() {
         return (<form onSubmit={ this.onFormSubmit } className='well'>
-        		<h1>{ this.props.upd.id ? 'Update Form':'Insert Form' }</h1>
+                <span style={{float:'right', cursor:'pointer'}} onClick={this.props.closeForm}>X</span>
+                <h1>{ this.props.upd.id ? 'Update Form':'Insert Form' }</h1>
                 <div className='form-group'>
 				    <label>Name</label>
 				    <input type='text' className='form-control' 

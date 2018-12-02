@@ -8,11 +8,12 @@ class SampleTable extends Component {
         super(props);
         
         this.state = {
+            showForm: false,
             TRs: [
               {
                 id: 1,  
-                name: 'rock',
-                desc: 'A form of solid matter that can break the head whoever hits'
+                name: 'Sanix',
+                desc: 'Is it fair to think how the world end up like what we have now?'
               }
             ],
             UPD:[]
@@ -80,23 +81,42 @@ class SampleTable extends Component {
     componentDidMount(){
         // this.setState({ TRs: this.props.tableRow })
     }
+
+    showForm = () => {
+        this.setState({
+            showForm: !this.state.showForm
+        })
+    }
+
+    closeForm = () => {
+        this.setState({
+            showForm: false
+        })
+    }
     render() {
         const display = {
             display: 'none'
         }
         const tRow = this.state.TRs.map(tr => (
-            <TableBody onUpd={this.updateRow} TRs={ tr } key={tr.id} canHan={ this.cancelUpd } />
+            <TableBody onUpd={this.updateRow} showForm={this.showForm} TRs={ tr } key={tr.id} canHan={ this.cancelUpd } />
         ))
+
+        const size_box_table = (this.state.showForm) ? "col-md-8" : "col-md-12";
 
         return (
             <div className='row margin-top'>
-                <div className='col-md-4'>
-                    <AddFormData onAdd={ this.onAddForm } 
-                        upd={ this.state.UPD } 
-                        updcan={ this.cancelUpd } 
-                        propUpd= { this.propcessUpd } />
-                </div>
-                <div className='col-md-8'>
+                {this.state.showForm ? 
+                    <div className='col-md-4'>
+                        <AddFormData 
+                            closeForm={this.closeForm}
+                            onAdd={ this.onAddForm } 
+                            upd={ this.state.UPD } 
+                            updcan={ this.cancelUpd } 
+                            propUpd= { this.propcessUpd } />
+                    </div>
+                : null}
+                <div className={size_box_table}>
+                    <button style={{float:'right'}} onClick={() => this.showForm()}>Show / Hide Form</button>
                     <div className='row h35'>
                         <div className='col-md-6'>
                             <button onClick={ this.delNrow } id='del_rowBtn' 
